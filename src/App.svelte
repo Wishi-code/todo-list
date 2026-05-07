@@ -1,110 +1,119 @@
 <script>
-	let name = "Wishie";
-	let mainTasks = [
-		{ task: "Buy milk", id: 1 },
-		{ task: "Clean the house", id: 2 },
-		{ task: "Pay bills", id: 3 },
-		{ task: "Finish the project", id: 4 },
-		{ task: "Walk the dog", id: 5 },
-		{ task: "Finish the report", id: 6 }
-	];
-	let extraTasks = [ { activity: "Learn Svelte", id: 7 }, 
-	{ activity: "Go for a run", id: 8 }, 
-	{ activity: "Call a friend", id: 9 } ];
+	import High from "./high.svelte";
+	import Medium from "./medium.svelte";
+	import Low from "./low.svelte";
+	import Personal from "./personal.svelte";
+	import Study from "./study.svelte";
+	import Work from "./work.svelte";
 
-	const deleteMain = (id) => {
-		mainTasks = mainTasks.filter((task) => task.id != id);
-	};
-	const deleteExtra=(id)=>{
-		extraTasks= extraTasks.filter((activity)=>activity.id !=id);
-	}
+	let showHigh = false;
+	let showMedium = false;
+	let showLow = false;
+	let showPersonal = false;
+	let showStudy = false;
+	let showWork = false;
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<h3>This is my to-do list</h3>
-	<h2>Main Tasks:</h2>
-	<ul>
-		{#each mainTasks as task}
+	<main>
+		<h1>Hello Wishie!</h1>
+		<h3>This is my task manager.</h3>
+		<p>I have the following tasks to complete: high priority, medium, low, personal, study and work tasks.</p>
+		<p>Click on the task to delete it from the list once done.</p>
+
 		<div>
-		<p>{task.task}</p>
-         <button on:click={() => deleteMain(task.id)}>Delete Task</button>
+			<button on:click={() => (showHigh = !showHigh)}>{showHigh ? 'Hide' : 'Show'} High Priority Tasks</button>
+			{#if showHigh}
+				<High />
+			{/if}
 		</div>
-		{/each}
-	</ul>
-	
 
-
-	<h3>If I have extra time, I will work on the following:</h3>
-	<ul>
-		{#each extraTasks as activity}
 		<div>
-			<p>{activity.activity}</p>
-			 <button on:click={() => deleteExtra(activity.id)}>Delete Activity</button>
+			<button on:click={() => (showMedium = !showMedium)}>{showMedium ? 'Hide' : 'Show'} Medium Priority Tasks</button>
+			{#if showMedium}
+				<Medium />
+			{/if}
 		</div>
-		{/each}
-	</ul>
-</main>
 
-<style>
-h3{
-	color:darkgoldenrod;
-	text-align: center;
-	text-decoration: wavy;
-	text-transform: capitalize;
-	letter-spacing: 0cap;
-	margin: 0.5em;
-	
-}
-h3:hover{
-	color:red;
-	cursor:pointer;
-}
+		<div>
+			<button on:click={() => (showLow = !showLow)}>{showLow ? 'Hide' : 'Show'} Low Priority Tasks</button>
+			{#if showLow}
+				<Low />
+			{/if}
+		</div>
 
-body{
-	background-color: #121212;
-	color: #e0e0e0;
-	display: flex;
-	align-items: center;
-	scroll-behavior: smooth;
+		<div>
+			<button on:click={() => (showPersonal = !showPersonal)}>{showPersonal ? 'Hide' : 'Show'} Personal Tasks</button>
+			{#if showPersonal}
+				<Personal />
+			{/if}
+		</div>
 
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-button{
-	background-color: #ff3e00;
-	color: white;
-	border: none;
-	padding: 0.5em 1em;
-	border-radius: 4px;
-	cursor: pointer;
-	margin-left: 1em;
-}
-.button:hover{
-	background-color:aquamarine;
-	color: black;}
-	p{
-		color: black
-		font-size: 1.2em;
-		
-	}
-	/*main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
+		<div>
+			<button on:click={() => (showStudy = !showStudy)}>{showStudy ? 'Hide' : 'Show'} Study Tasks</button>
+			{#if showStudy}
+				<Study />
+			{/if}
+		</div>
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
+		<div>
+			<button on:click={() => (showWork = !showWork)}>{showWork ? 'Hide' : 'Show'} Work Tasks</button>
+			{#if showWork}
+				<Work />
+			{/if}
+		</div>
+	</main>
 
-	@media (min-width: 640px) {
+	<style>
 		main {
-			max-width: none;
+			background-image: src="https://i.pinimg.com/736x/c4/68/fd/c468fdaaebba505255e9c9cd81a9b702.jpg";
+			min-height: 100vh;
+			background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url("");
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+			text-align: center;
+			padding: 1em;
+			max-width: 640px;
+			margin: 40px auto;
+			background-color: white;
+			/* gradient applied via background-image above */
 		}
-	}*/
+		h1 {
+			color: darkblue;
+			text-decoration: underline wavy;
+			font-style: italic;
+			font-size: 2em;
+		}
+		h3 {
+			color: darkcyan;
+			text-decoration: underline wavy;
+			text-transform: capitalize;
+			margin: 0.5em;
+		}
 
-</style>
+		h3:hover {
+			color: red;
+			cursor: pointer;
+		}
+
+		button {
+			background-color: black;
+			color: white;
+			border: 2px light cyan solid;
+			padding: 0.5em 1em;
+			border-radius: 2px;
+			cursor: pointer;
+			margin: 0.5em;
+			
+		}
+
+		button:hover {
+			background-color: aquamarine;
+			color: black;
+		}
+
+		p {
+			color: black;
+			font-size: 1.1em;
+		}
+	</style>

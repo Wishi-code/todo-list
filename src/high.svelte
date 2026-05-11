@@ -1,39 +1,31 @@
 <script>
 
-
-// This component displays high priority tasks. It can be used to highlight important tasks that need immediate attention.  
-let showHigh = true;
-let highPriorityTasks=[
-    { task: "Finish the report", id: 1 },
-    { task: "Prepare for the meeting", id: 2},
-    { task: "Respond to urgent emails", id: 3} 
-]
+ 
+export let data =[];
+export let category = "high";
 //we want to filter main tasks using their id.
-const deleteHigh=(id)=>{
-    highPriorityTasks= highPriorityTasks.filter((task)=> task.id != id);
-}
+export let deleteTask = (id) => {};;
 
 </script>
 
 
 <main>
-    {#if showHigh}
-        <div class="high">
-            <div class="hig">
-                <div>
-                    <h2>High Priority Tasks</h2>
-                    <ul>
-                        {#each highPriorityTasks as task}
-                            
-                                <p>{task.task}</p>
-                                <button on:click={() => deleteHigh(task.id)}>Delete Task</button>
-                            
-                        {/each}
-                    </ul>
-                </div>
+    <div class="high">
+        <div class="hig">
+            <div>
+                <h2>High Priority Tasks</h2>
+                <ul>
+                    {#each data.filter((task) => task.category === category) as task}
+                        
+                            <p>{task.task}</p>
+                            <button on:click={() => deleteTask(task.id)}>Delete Task</button>
+                        
+                    {/each}
+                </ul>
             </div>
         </div>
-    {/if}
+    </div>
+  
 </main>
 <style>
     .high{
